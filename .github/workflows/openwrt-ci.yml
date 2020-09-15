@@ -55,6 +55,8 @@ jobs:
       - name: Generate configuration file
         run: |
           curl -fsSL https://raw.githubusercontent.com/siropboy/other/master/patch/x86-64/allappdrv.config > .config
+          sed -i 's/\(CONFIG_TARGET_KERNEL_PARTSIZE\).*/\1=50/g' .config
+          sed -i 's/\(CONFIG_TARGET_ROOTFS_PARTSIZE\).*/\1=5120/g' .config
           make defconfig
 
       - name: Make download
